@@ -11,6 +11,9 @@ public class QuizGame {
   private String apiUrl;
   private int score = 0;
 
+  // private QuizSettings settings;
+  // private Quiz quiz
+
   public QuizGame(String apiUrl) {
     this.apiUrl = apiUrl;
   }
@@ -29,14 +32,14 @@ public class QuizGame {
       Quiz quiz = deserializeQuiz(response.body());
 
       // Display the quiz question to the player
-      //displayQuestion(quiz);
+      // displayQuestion(quiz);
 
       // Quiz the user
       Quizzer quizzer = new Quizzer();
       quizzer.quizUser(quiz.getResults(), this);
 
       // Display final score
-      System.out.println("Final Score: " + score);
+      // System.out.println("Final Score: " + score);
     } catch (Exception e) {
       System.out.println("An error occurred while fetching quiz question: " + e.getMessage());
     }
@@ -95,5 +98,13 @@ public class QuizGame {
 
   public int getScore() {
     return score;
+  }
+
+  public boolean check_win() {
+    if (score >= 10) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

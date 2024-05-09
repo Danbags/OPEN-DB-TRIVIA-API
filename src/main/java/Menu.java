@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Menu {
+public class Menu{
   private Scanner scanner;
 
   public Menu() {
@@ -10,11 +10,11 @@ public class Menu {
   public void displayMenu() {
     MessagePrinter messagePrinter = new MessagePrinter();
     messagePrinter.printMessage("Welcome to the Quiz Game!", true, true);
-   // System.out.println("Welcome to the Quiz Game!");
+    // System.out.println("Welcome to the Quiz Game!");
     messagePrinter.printMessage("1)Begin Game", false, true);
-   // System.out.println("1. Begin Game");
+    // System.out.println("1. Begin Game");
     messagePrinter.printMessage("2)Quit", false, true);
-    //System.out.println("2. Exit");
+    // System.out.println("2. Exit");
   }
 
   public int getUserChoice() {
@@ -46,8 +46,8 @@ public class Menu {
   }
 
   private void startGame() {
-      QuizGame quizGame = new QuizGame("https://opentdb.com/api.php?amount=1");
-      quizGame.startGame();
+    QuizGame quizGame = new QuizGame("https://opentdb.com/api.php?amount=1");
+    quizGame.startGame();
   }
 
 }

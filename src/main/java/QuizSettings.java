@@ -25,30 +25,30 @@ public class QuizSettings {
   public void promptUser() {
     MessagePrinter messagePrinter = new MessagePrinter();
     messagePrinter.printMessage("Please select the category of your choice: ", true, true);
-    //System.out.println("Please select the category of your choice: ");
+    // System.out.println("Please select the category of your choice: ");
     for (int i = 0; i < options1.length; i++) {
-      messagePrinter.printMessage(i +") " + options1[i], true, true);
-     // System.out.println(i + ". " + options1[i]);
+      messagePrinter.printMessage(i + ") " + options1[i], true, true);
+      // System.out.println(i + ". " + options1[i]);
     }
     this.category = scanner.nextInt();
     messagePrinter.printMessage("Please select the difficulty of your choice", true, true);
-   // System.out.println("Please select the difficulty of your choice");
+    // System.out.println("Please select the difficulty of your choice");
     for (int i = 0; i < options2.length; i++) {
-      messagePrinter.printMessage(i +") " + options2[i], true, true);
+      messagePrinter.printMessage(i + ") " + options2[i], true, true);
 
-     // System.out.println(i + ". " + options2[i]);
+      // System.out.println(i + ". " + options2[i]);
     }
     int difficultyChoice = scanner.nextInt();
 
     if (difficultyChoice >= 1) {
       this.difficulty = options2[difficultyChoice];
     }
-  messagePrinter.printMessage("Please select the type of your choice", true, true);
-   // System.out.println("Please select the type of questions you prefer");
+    messagePrinter.printMessage("Please select the type of your choice", true, true);
+    // System.out.println("Please select the type of questions you prefer");
     for (int i = 0; i < options3.length; i++) {
-      messagePrinter.printMessage(i +") " + options3[i], true, true);
+      messagePrinter.printMessage(i + ") " + options3[i], true, true);
 
-      //System.out.println(i + ". " + options3[i]);
+      // System.out.println(i + ". " + options3[i]);
     }
     int questionTypeChoice = scanner.nextInt();
     if (questionTypeChoice >= 1) {

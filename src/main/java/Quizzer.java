@@ -18,12 +18,12 @@ public class Quizzer {
       // System.out.println("Options:");
 
       for (int i = 0; i < options.size(); i++) {
-       // System.out.println((i + 1) + ". " + options.get(i));
+        // System.out.println((i + 1) + ". " + options.get(i));
         messagePrinter.printMessage(i + 1 + ")" + options.get(i), true, true);
 
       }
 
-      //System.out.print("Your answer: ");
+      // System.out.print("Your answer: ");
       messagePrinter.printMessage("Your answer: ", true, true);
       int userChoice = -1;
       boolean validInput = false;
@@ -51,14 +51,27 @@ public class Quizzer {
       String userAnswer = options.get(userChoice - 1);
 
       if (userAnswer.equals(question.getCorrectAnswer())) {
-        System.out.println("Correct!");
+        messagePrinter.printMessage("Correct", true, true);
         game.addToScore(1);
+        messagePrinter.printMessage("New Score: " + game.getScore(), true, true);
       } else {
-        System.out.println("Incorrect!");
+        messagePrinter.printMessage("Incorrect, The answer is: " + question.getCorrectAnswer(), true, true);
       }
+
     }
 
-    System.out.println("Quiz completed!");
+    // System.out.println("Quiz completed!");
+    messagePrinter.printMessage("Quiz completed!", true, true);
+    if (game.check_win()) {
+      messagePrinter.printMessage("Congratulations! You have beat the game!", true, true);
+
+    } else {
+      messagePrinter.printMessage("Sorry, you lose !", true, true);
+    }
+    messagePrinter.printMessage("Final Score: " + game.getScore(), true, true);
+    System.exit(0);
+    // }
     scanner.close();
+
   }
 }
