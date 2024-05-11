@@ -1,5 +1,5 @@
 import java.util.Arrays;
-
+//TO HELP FORMAT THE MESSAGES INTO THE BOX TO MAKE  IT EASIER ON THE USERS EYES SO THEY CAN KEEP TRACK OF WHAT IS BEING PRINTED/GOING ON
 public class MessagePrinter {
     public void printMessage(String message, boolean printTop, boolean printBottom) {
         if (printTop) {

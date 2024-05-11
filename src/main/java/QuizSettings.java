@@ -13,9 +13,11 @@ public class QuizSettings {
   private final String[] options2 = { "Any", "easy", "medium", "hard" };
   private final String[] options3 = { "Any", "multiple", "boolean" };
   private Scanner scanner; // Declare the Scanner object at the class level
+  private int amount;
 
   public QuizSettings() {
     // Initialize default values
+    this.amount = 1;
     this.category = 0;
     this.difficulty = "";
     this.questionType = "";
@@ -24,6 +26,8 @@ public class QuizSettings {
 
   public void promptUser() {
     MessagePrinter messagePrinter = new MessagePrinter();
+    messagePrinter.printMessage("How many Questions(10 Max): ", true, true);
+    this.amount = scanner.nextInt();
     messagePrinter.printMessage("Please select the category of your choice: ", true, true);
     // System.out.println("Please select the category of your choice: ");
     for (int i = 0; i < options1.length; i++) {
@@ -66,6 +70,9 @@ public class QuizSettings {
 
   public String getQuestionType() {
     return questionType;
+  }
+  public int getAmount() {
+    return amount;
   }
 
   // Add a method to close the Scanner object when no longer needed

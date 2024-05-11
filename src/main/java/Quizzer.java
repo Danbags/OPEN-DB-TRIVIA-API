@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.*;
 import java.util.Scanner;
 
-public class Quizzer {
+public class Quizzer extends Leaderboard {
   public void quizUser(List<Result> questions, QuizGame game) {
     Scanner scanner = new Scanner(System.in);
     MessagePrinter messagePrinter = new MessagePrinter();
@@ -64,12 +64,16 @@ public class Quizzer {
     messagePrinter.printMessage("Quiz completed!", true, true);
     if (game.check_win()) {
       messagePrinter.printMessage("Congratulations! You have beat the game!", true, true);
+      //SUBMIT USER TO LEADERBOARD
+      SubmitUserToLeaderboard(getLoginUsername(), game.getScore());
 
     } else {
       messagePrinter.printMessage("Sorry, you lose !", true, true);
     }
     messagePrinter.printMessage("Final Score: " + game.getScore(), true, true);
     System.exit(0);
+
+    
     // }
     scanner.close();
 
