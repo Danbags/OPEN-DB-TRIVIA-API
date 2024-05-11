@@ -7,15 +7,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class QuizGame {
-  private static final String API_BASE_URL = "https://opentdb.com/api.php?amount=1";
+  private static final String API_BASE_URL = "https://opentdb.com/api.php?";
   private String apiUrl;
   private int score = 0;
+  private int question_amount;
 
   // private QuizSettings settings;
   // private Quiz quiz
-
+//amount=1
   public QuizGame(String apiUrl) {
     this.apiUrl = apiUrl;
+    
   }
 
   public void startGame() {
@@ -47,7 +49,8 @@ public class QuizGame {
 
   private String constructApiUrl(QuizSettings settings) {
     StringBuilder apiUrlBuilder = new StringBuilder(API_BASE_URL);
-
+apiUrlBuilder.append("amount=").append(settings.getAmount());
+    question_amount= settings.getAmount();
     if (settings.getCategory() >= 9) {
       apiUrlBuilder.append("&category=").append(settings.getCategory());
     }
@@ -101,7 +104,7 @@ public class QuizGame {
   }
 
   public boolean check_win() {
-    if (score >= 10) {
+    if (score > question_amount * 0.7) {
       return true;
     } else {
       return false;

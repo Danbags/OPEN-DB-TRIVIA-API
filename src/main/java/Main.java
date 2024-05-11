@@ -2,41 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-       /* Menu menu = new Menu();
-        while (true) {
-            menu.displayMenu();
-            int choice = menu.getUserChoice();
-            menu.processChoice(choice);*/
-        
-        Scanner scanner = new Scanner(System.in);
-
-
-
-        // Instantiate User and perform login
-        User user = new User();
-        user.getLogin();
-        if(user.checkLogin(user.getUsername(), user.getPassword()))
-        {
-            Menu menu = new Menu();
-            while (true) {
+    
+                MessagePrinter messagePrinter = new MessagePrinter();
+        DatabaseService databaseService = new DatabaseService();
+                UserService userService = new UserService(databaseService); 
+        // Initialize UserService as needed
+                // Menu menu = new Menu(messagePrinter, userService);
+Menu menu = new Menu();
                 menu.displayMenu();
-                int choice = menu.getUserChoice();
-                menu.processChoice(choice);
+            }
         }
-        }
-
-        // Close scanner
-        scanner.close();
-      
-}
-}
-
-/*
- * public class Main {
- * public static void main(String[] args) throws Exception {
- * 
- * QuizGame quizGame = new QuizGame("https://opentdb.com/api.php?amount=1");
- * quizGame.startGame();
- * }
- * }
- */
