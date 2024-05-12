@@ -10,14 +10,12 @@ public class Quizzer extends Leaderboard {
 
       messagePrinter.printMessage("Question: " + question.getQuestion(), true, true);
 
-     
       List<String> options = question.getIncorrectAnswers();
       options.add(question.getCorrectAnswer());
       Collections.shuffle(options);
 
-
       for (int i = 0; i < options.size(); i++) {
-        
+
         messagePrinter.printMessage(i + 1 + ")" + options.get(i), true, true);
 
       }
@@ -63,7 +61,7 @@ public class Quizzer extends Leaderboard {
     messagePrinter.printMessage("Quiz completed!", true, true);
     if (game.check_win()) {
       messagePrinter.printMessage("Congratulations! You have beat the game!", true, true);
-      //SUBMIT USER TO LEADERBOARD
+      // SUBMIT USER TO LEADERBOARD
       SubmitUserToLeaderboard(getLoginUsername(), game.getScore());
 
     } else {
@@ -72,7 +70,6 @@ public class Quizzer extends Leaderboard {
     messagePrinter.printMessage("Final Score: " + game.getScore(), true, true);
     System.exit(0);
 
-    
     // }
     scanner.close();
 

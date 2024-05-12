@@ -8,21 +8,22 @@ import java.io.FileNotFoundException;
 
 /**
  * This class represents a leaderboard for tracking user scores.
- * It provides methods for submitting user scores and displaying the leaderboard.
+ * It provides methods for submitting user scores and displaying the
+ * leaderboard.
  */
 
 public class Leaderboard extends User {
     /**
-       * The message printer instance used for printing messages.
-       */
+     * The message printer instance used for printing messages.
+     */
     private MessagePrinter messagePrinter = new MessagePrinter();
-    
+
     /**
-       * Submits the user's score to the leaderboard.
-       * 
-       * @param username The username of the user.
-       * @param score The score to submit.
-       */
+     * Submits the user's score to the leaderboard.
+     * 
+     * @param username The username of the user.
+     * @param score    The score to submit.
+     */
     public void SubmitUserToLeaderboard(String username, int score) {
         try {
             FileWriter writer = new FileWriter("src/leaderboard.txt", true); // Append mode
@@ -34,12 +35,13 @@ public class Leaderboard extends User {
             e.printStackTrace();
         }
     }
+
     /**
-       * Displays the leaderboard showing the top scores.
-       */
-    
+     * Displays the leaderboard showing the top scores.
+     */
+
     public void displayLeaderboard() {
-       
+
         try {
             File file = new File("src/leaderboard.txt"); // Path to leaderboard file
             Scanner fileScanner = new Scanner(file);

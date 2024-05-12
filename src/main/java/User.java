@@ -1,16 +1,17 @@
 import java.util.Scanner;
+
 /**
  * This class represents a user of the application.
  * It contains information about the user such as username and password.
  */
-public class User  {
-/**
-       * The username of the user.
-       */
+public class User {
+    /**
+     * The username of the user.
+     */
     private String username;
     /**
-       * The password of the user.
-       */
+     * The password of the user.
+     */
     private String password;
     private Scanner scan;
 
@@ -23,7 +24,7 @@ public class User  {
         return password;
     }
 
-    public void setUsername(String user)     {
+    public void setUsername(String user) {
         username = user;
     }
 

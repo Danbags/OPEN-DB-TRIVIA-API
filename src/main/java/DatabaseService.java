@@ -42,7 +42,8 @@ public class DatabaseService {
   }
 
   /**
-   * Checks if the provided username and password match any records in the database.
+   * Checks if the provided username and password match any records in the
+   * database.
    * 
    * @param username The username to check.
    * @param password The password to check.
