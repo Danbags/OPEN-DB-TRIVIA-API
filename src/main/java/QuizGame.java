@@ -6,24 +6,52 @@ import com.google.gson.Gson;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class represents a quiz game.
+ * It provides methods for starting the game, fetching quiz questions,
+ * and quizzing the user.
+ */
+
 public class QuizGame {
+  /**
+   * The base URL of the quiz API.
+   */
   private static final String API_BASE_URL = "https://opentdb.com/api.php?";
-  private String apiUrl;
+  /**
+   * The API URL for fetching quiz questions.
+   */
+ private String apiUrl;
+  /**
+   * The score of the player.
+   */
   private int score = 0;
+  /**
+   * The amount of questions in the quiz.
+   */
   private int question_amount;
 
   // private QuizSettings settings;
   // private Quiz quiz
 //amount=1
+
+  /**
+   * Constructs a new QuizGame object with the specified API URL.
+   * 
+   * @param apiUrl The URL of the quiz API.
+   */
   public QuizGame(String apiUrl) {
     this.apiUrl = apiUrl;
     
   }
 
+  /**
+   * Starts the quiz game.
+   */
   public void startGame() {
     QuizSettings settings = new QuizSettings();
     settings.promptUser();
 
+    
     String apiUrl = constructApiUrl(settings);
 
     try {
@@ -46,7 +74,12 @@ public class QuizGame {
       System.out.println("An error occurred while fetching quiz question: " + e.getMessage());
     }
   }
-
+  /**
+   * Constructs the API URL based on the quiz settings.
+   * 
+   * @param settings The quiz settings.
+   * @return The constructed API URL.
+   */
   private String constructApiUrl(QuizSettings settings) {
     StringBuilder apiUrlBuilder = new StringBuilder(API_BASE_URL);
 apiUrlBuilder.append("amount=").append(settings.getAmount());

@@ -10,15 +10,14 @@ public class Quizzer extends Leaderboard {
 
       messagePrinter.printMessage("Question: " + question.getQuestion(), true, true);
 
-      // System.out.println("Question: " + question.getQuestion());
+     
       List<String> options = question.getIncorrectAnswers();
       options.add(question.getCorrectAnswer());
       Collections.shuffle(options);
 
-      // System.out.println("Options:");
 
       for (int i = 0; i < options.size(); i++) {
-        // System.out.println((i + 1) + ". " + options.get(i));
+        
         messagePrinter.printMessage(i + 1 + ")" + options.get(i), true, true);
 
       }

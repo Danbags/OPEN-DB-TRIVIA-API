@@ -1,6 +1,16 @@
 import java.util.Arrays;
-//TO HELP FORMAT THE MESSAGES INTO THE BOX TO MAKE  IT EASIER ON THE USERS EYES SO THEY CAN KEEP TRACK OF WHAT IS BEING PRINTED/GOING ON
+/**
+ * This class represents a printer for formatting and printing messages.
+ * It provides a method for printing messages in a formatted box.
+ */
 public class MessagePrinter {
+     /**
+       * Prints a message in a formatted box.
+       * 
+       * @param message The message to print.
+       * @param printTop Whether to print the top border of the box.
+       * @param printBottom Whether to print the bottom border of the box.
+       */
     public void printMessage(String message, boolean printTop, boolean printBottom) {
         if (printTop) {
             System.out.println(
