@@ -39,6 +39,7 @@ public class QuizSettings {
   /**
    * Constructs a new QuizSettings object with default settings.
    */
+
   public QuizSettings() {
     // Initialize default values
     this.amount = 1;
@@ -76,9 +77,23 @@ public class QuizSettings {
       messagePrinter.printMessage(i + ") " + options1[i], true, true);
 
     }
-    // int categoryChoice = scanner.nextInt();
-    this.category = scanner.nextInt();
+    int categoryChoice = scanner.nextInt();
+    // this.category = scanner.nextInt();
 
+    while (!validcategory) {
+      if (categoryChoice >= 0 && categoryChoice <= 24) {
+        validcategory = true;
+        if (categoryChoice == 0) {
+          this.category = 0;
+        } else {
+          this.category = scanner.nextInt();
+        }
+      } else {
+        messagePrinter.printMessage("Invalid Range, Please enter a number between 0 and 24", true, true);
+        categoryChoice = scanner.nextInt();
+      }
+
+    }
     // TO SELECT DIFFICULTY OF CHOICE FROM EASY TO HARD.A FAILSAFE IS ADDED TO MAKE
     // SURE THE USERS SELECT A VALID DIFFICULTY
     messagePrinter.printMessage("Please select the difficulty of your choice", true, true);

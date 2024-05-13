@@ -35,6 +35,7 @@ public class Menu extends User {
    * that initializes the message printer, user service, scanner, database
    * service, and leaderboard.
    */
+
   public Menu() {
 
     messagePrinter = new MessagePrinter();

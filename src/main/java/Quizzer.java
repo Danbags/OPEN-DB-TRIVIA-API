@@ -24,7 +24,7 @@ public class Quizzer extends Leaderboard {
       messagePrinter.printMessage("Your answer: ", true, true);
       int userChoice = -1;
       boolean validInput = false;
-
+//TO MAKE SURE THE USER INPUTS A VALID INTEGER  NUMBER and not 
       while (!validInput) {
         try {
           if (scanner.hasNextInt()) {
@@ -39,13 +39,25 @@ public class Quizzer extends Leaderboard {
           scanner.next(); // Clear invalid input
         }
       }
-
-      if (userChoice < 1 || userChoice > options.size()) {
+boolean validoption = false;
+      String userAnswer= "";
+      while (!validoption)
+        {
+          if(userChoice >=1 && userChoice <= options.size())
+          {
+            validoption = true;
+            userAnswer= options.get(userChoice - 1);
+          }else {
+            messagePrinter.printMessage("That was not part of the options listed, Have another go " + (options.size() - 1), true, true);
+            userChoice = scanner.nextInt();
+          }
+          
+     /* if (userChoice < 1 || userChoice > options.size()) {
         System.out.println("Invalid choice. Please select an option between 1 and " + options.size());
-        continue;
+        continue;*/
       }
 
-      String userAnswer = options.get(userChoice - 1);
+      // String userAnswer = options.get(userChoice - 1);//we -1 because the user will enter a number between 1 and 4, but the index of the array is 0,1,2,
 
       if (userAnswer.equals(question.getCorrectAnswer())) {
         messagePrinter.printMessage("Correct", true, true);
@@ -58,7 +70,7 @@ public class Quizzer extends Leaderboard {
     }
 
     // System.out.println("Quiz completed!");
-    messagePrinter.printMessage("Quiz completed!", true, true);
+    messagePrinter.printMessage("Game Over!", true, true);
     if (game.check_win()) {
       messagePrinter.printMessage("Congratulations! You have beat the game!", true, true);
       // SUBMIT USER TO LEADERBOARD

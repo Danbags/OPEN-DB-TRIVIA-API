@@ -55,7 +55,7 @@ public class Leaderboard extends User {
                     messagePrinter.printMessage(user + "\\t" + score, true, true);
                 } else {
                     // Handle invalid format or empty lines
-                    messagePrinter.printMessage("Invalid leaderboard entry: " + line, true, true);
+                    messagePrinter.printMessage("🔴" + line, true, true);
                 }
             }
             fileScanner.close();

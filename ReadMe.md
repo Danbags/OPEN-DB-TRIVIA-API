@@ -101,6 +101,66 @@ Overall, the classes in the Quiz Game Application are designed to work together 
 
 ## Contributors
 
-- [John Doe](https://replit.com/@1Anonymous1) - Lead Developer
-- 
+- [John Doe placeholder#1](link) - Lead Developer
+- [John Doe placeholder#2](link) -  Developer
+- [John Doe placeholder#3](link) -  Developer
 
+## UML CLASS RELATIONSHIPS:
+
+1. **DatabaseService**:
+   - **Dependency** depends on print message class to print nessage
+
+2. **Leaderboard**:
+   - **Dependency**: Leaderboard depends on MessagePrinter for printing messages.
+   - **Association**: Leaderboard associates with User for submitting scores to the leaderboard.
+
+3. **Main**:
+   - **Dependency**: Main depends on Menu for displaying the main menu.
+
+4. **Menu**:
+   - **Association**: Menu associates with UserService for user-related options.
+   - **Association**: Menu associates with Leaderboard for displaying the leaderboard.
+**Association**: Menu associates with DatabaseService for registering and verifying users.
+
+   - **Dependency**: Menu depends on MessagePrinter for printing messages.
+
+5. **MessagePrinter**:
+   - No relationships other than being used by other classes for message printing.
+
+6. **Quiz**:
+   - No relationships only used for deserializing the json
+
+7. **QuizGame**:
+   - **Aggregation**: QuizGame aggregates QuizSettings,results and Quiz for game setup and quiz data.
+   - **Dependency**: QuizGame depends on MessagePrinter for printing messages.
+
+8. **QuizSettings**:
+   - **Association**: QuizSettings associates with QuizGame for game setup.
+   - **Dependency**: QuizSettings depends on MessagePrinter for printing messages.
+
+9. **Quizzer**:
+   - **Dependency**: Quizzer depends on MessagePrinter for printing messages.
+   - **Aggregation**: Quizzer aggregates QuizGame and results for quizzing functionality.
+
+10. **Result**:
+    - No relationships.
+
+11. **User**:
+   No relationship 
+
+12. **UserService**:
+    - **Dependency**: UserService depends on DatabaseService for user-related database operations.
+
+   ## UML CLASS RELATIONSHIPS:
+**BUGS**
+- Resource Leaks:
+   - - Since most of the program requires users input,memory leak from scanners and file handles not being closed.
+       
+ - IndexOutofBounds:
+   -  - Since arrays were used to store answers and hold options availe to the users.IndexOutofBounds was a common issue.In order to fix it,try cases and boolean test cases were implemented to try to catch the error and correct it right away.
+        
+- Invalid Input Handling:
+   - - Since most classes lacked input validation,errors usually occured when out of bounds especially during run time.
+    
+- Huge codebase:
+   - - Since the code bases is huge,most classes were full of methods and variables.Unused methods,imports and variables.One thing gets touched and the whole thing breaks, it gets harder to locate what to fix and maintain.In order to combat that the codebase was simplified and seperated into different classes/sub classes.

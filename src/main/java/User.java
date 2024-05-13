@@ -13,7 +13,6 @@ public class User {
      * The password of the user.
      */
     private String password;
-    private Scanner scan;
 
     // Getters and setters for the fields...
     public String getLoginUsername() {
