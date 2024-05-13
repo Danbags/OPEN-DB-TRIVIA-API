@@ -20,7 +20,7 @@ public class QuizGame {
   /**
    * The API URL for fetching quiz questions.
    */
- private String apiUrl;
+  private String apiUrl;
   /**
    * The score of the player.
    */
@@ -32,7 +32,7 @@ public class QuizGame {
 
   // private QuizSettings settings;
   // private Quiz quiz
-//amount=1
+  // amount=1
 
   /**
    * Constructs a new QuizGame object with the specified API URL.
@@ -41,7 +41,7 @@ public class QuizGame {
    */
   public QuizGame(String apiUrl) {
     this.apiUrl = apiUrl;
-    
+
   }
 
   /**
@@ -51,7 +51,6 @@ public class QuizGame {
     QuizSettings settings = new QuizSettings();
     settings.promptUser();
 
-    
     String apiUrl = constructApiUrl(settings);
 
     try {
@@ -74,6 +73,7 @@ public class QuizGame {
       System.out.println("An error occurred while fetching quiz question: " + e.getMessage());
     }
   }
+
   /**
    * Constructs the API URL based on the quiz settings.
    * 
@@ -82,8 +82,8 @@ public class QuizGame {
    */
   private String constructApiUrl(QuizSettings settings) {
     StringBuilder apiUrlBuilder = new StringBuilder(API_BASE_URL);
-apiUrlBuilder.append("amount=").append(settings.getAmount());
-    question_amount= settings.getAmount();
+    apiUrlBuilder.append("amount=").append(settings.getAmount());
+    question_amount = settings.getAmount();
     if (settings.getCategory() >= 9) {
       apiUrlBuilder.append("&category=").append(settings.getCategory());
     }

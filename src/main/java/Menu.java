@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * This class represents the main menu of the application.
  * It provides methods for displaying the menu and handling user input.
@@ -31,10 +32,12 @@ public class Menu extends User {
 
   /**
    * Constructs a new Menu object.
-   that initializes the message printer, user service, scanner, database service, and leaderboard.
+   * that initializes the message printer, user service, scanner, database
+   * service, and leaderboard.
    */
+
   public Menu() {
-    
+
     messagePrinter = new MessagePrinter();
     scanner = new Scanner(System.in);
     databaseService = new DatabaseService();
@@ -43,6 +46,7 @@ public class Menu extends User {
     leaderboard = new Leaderboard();
 
   }
+
   /**
    * Displays the main menu of the application.
    */
@@ -81,38 +85,40 @@ public class Menu extends User {
   }
 
   private void signup() {
-      String username = "", password = "";
-      boolean validUsername = false;
-      boolean validPassword = false;
+    String username = "", password = "";
+    boolean validUsername = false;
+    boolean validPassword = false;
 
-      // Loop until a valid username is entered
-      while (!validUsername) {
-          messagePrinter.printMessage("Enter your desired username (minimum 4 characters, no spaces): ", true, true);
-          username = scanner.nextLine();
+    // Loop until a valid username is entered
+    while (!validUsername) {
+      messagePrinter.printMessage("Enter your desired username (minimum 4 characters, no spaces): ", true, true);
+      username = scanner.nextLine();
 
-          // Check if username meets length and character requirements
-          if (username.length() >= 4 && !username.contains(" ")) {
-              validUsername = true;
-          } else {
-              messagePrinter.printMessage("Invalid username. Username must be at least 4 characters long and contain no spaces.", true, true);
-          }
+      // Check if username meets length and character requirements
+      if (username.length() >= 4 && !username.contains(" ")) {
+        validUsername = true;
+      } else {
+        messagePrinter.printMessage(
+            "Invalid username. Username must be at least 4 characters long and contain no spaces.", true, true);
       }
+    }
 
-      // Loop until a valid password is entered
-      while (!validPassword) {
-          messagePrinter.printMessage("Enter your desired password (minimum 6 characters): ", true, true);
-          password = scanner.nextLine();
+    // Loop until a valid password is entered
+    while (!validPassword) {
+      messagePrinter.printMessage("Enter your desired password (minimum 6 characters): ", true, true);
+      password = scanner.nextLine();
 
-          // Check if password meets length requirement
-          if (password.length() >= 6) {
-              validPassword = true;
-          } else {
-              messagePrinter.printMessage("Invalid password. Password must be at least 6 characters long.No Spaces", true, true);
-          }
+      // Check if password meets length requirement
+      if (password.length() >= 6) {
+        validPassword = true;
+      } else {
+        messagePrinter.printMessage("Invalid password. Password must be at least 6 characters long.No Spaces", true,
+            true);
       }
+    }
 
-      // Once both username and password are valid, proceed with signup
-      userService.signup(username, password);
+    // Once both username and password are valid, proceed with signup
+    userService.signup(username, password);
   }
 
   private void login() {
@@ -127,8 +133,9 @@ public class Menu extends User {
       setUsername(username);
       setPassword(password);
       loggedIn = true;
-     } //else {
-    //   messagePrinter.printMessage("Invalid username or password. Please try again.", true, true);
+    } // else {
+    // messagePrinter.printMessage("Invalid username or password. Please try
+    // again.", true, true);
     // }
   }
 

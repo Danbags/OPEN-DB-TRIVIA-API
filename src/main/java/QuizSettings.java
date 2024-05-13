@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * This class represents the settings for configuring the quiz.
  * It provides methods for prompting the user to set quiz settings.
@@ -32,11 +33,13 @@ public class QuizSettings {
       "Entertainment: Cartoon & Animations" };
   private final String[] options2 = { "Any", "easy", "medium", "hard" };
   private final String[] options3 = { "Any", "multiple", "boolean" };
-  
+
   boolean validamount = false, validcategory = false, validdifficulty = false, validquestiontype = false;
+
   /**
    * Constructs a new QuizSettings object with default settings.
    */
+
   public QuizSettings() {
     // Initialize default values
     this.amount = 1;
@@ -45,9 +48,10 @@ public class QuizSettings {
     this.questionType = "";
     this.scanner = new Scanner(System.in); // Initialize the Scanner object
   }
+
   /**
    * Prompts the user to set quiz settings.
-   We build the api url based on the user inputs
+   * We build the api url based on the user inputs
    */
   public void promptUser() {
     MessagePrinter messagePrinter = new MessagePrinter();
@@ -73,62 +77,74 @@ public class QuizSettings {
       messagePrinter.printMessage(i + ") " + options1[i], true, true);
 
     }
-    //int categoryChoice = scanner.nextInt();
-   this.category = scanner.nextInt();
-    
+    int categoryChoice = scanner.nextInt();
+    // this.category = scanner.nextInt();
 
+    while (!validcategory) {
+      if (categoryChoice >= 0 && categoryChoice <= 24) {
+        validcategory = true;
+        if (categoryChoice == 0) {
+          this.category = 0;
+        } else {
+          this.category = scanner.nextInt();
+        }
+      } else {
+        messagePrinter.printMessage("Invalid Range, Please enter a number between 0 and 24", true, true);
+        categoryChoice = scanner.nextInt();
+      }
+
+    }
     // TO SELECT DIFFICULTY OF CHOICE FROM EASY TO HARD.A FAILSAFE IS ADDED TO MAKE
     // SURE THE USERS SELECT A VALID DIFFICULTY
     messagePrinter.printMessage("Please select the difficulty of your choice", true, true);
 
-    for (int i = 0; i < options2.length; i++) 
-    {
+    for (int i = 0; i < options2.length; i++) {
       messagePrinter.printMessage(i + ") " + options2[i], true, true);
     }
 
     int difficultyChoice = scanner.nextInt();
     while (!validdifficulty) {
-        if (difficultyChoice >= 0 && difficultyChoice < options2.length) {
-            validdifficulty = true;
-            if (difficultyChoice == 0) {
-                this.difficulty = "";
-            } else {
-                this.difficulty = options2[difficultyChoice];
-            }
+      if (difficultyChoice >= 0 && difficultyChoice < options2.length) {
+        validdifficulty = true;
+        if (difficultyChoice == 0) {
+          this.difficulty = "";
         } else {
-            messagePrinter.printMessage("Invalid Range, Please enter a number between 0 and " + (options2.length - 1), true, true);
-            difficultyChoice = scanner.nextInt(); // to update the value of difficultyChoice
+          this.difficulty = options2[difficultyChoice];
         }
+      } else {
+        messagePrinter.printMessage("Invalid Range, Please enter a number between 0 and " + (options2.length - 1), true,
+            true);
+        difficultyChoice = scanner.nextInt(); // to update the value of difficultyChoice
+      }
     }
-   
 
     // TO SELECT FROM MULTIPLE CHOICE OR TRUE OR FALSE.A FAILSAFE IS ADDED TO MAKE
     // SURE THE USERS SELECT A VALID QUESTION TYPE
     messagePrinter.printMessage("Please select the type of your choice", true, true);
 
-    for (int i = 0; i < options3.length; i++) 
-    {
+    for (int i = 0; i < options3.length; i++) {
       messagePrinter.printMessage(i + ") " + options3[i], true, true);
     }
-    
+
     int questionTypeChoice = scanner.nextInt();
-      // if (questionTypeChoice >= 1) {
-      //   this.questionType = options3[questionTypeChoice];
-      // }
+    // if (questionTypeChoice >= 1) {
+    // this.questionType = options3[questionTypeChoice];
+    // }
     while (!validquestiontype) {
-        if (questionTypeChoice >= 0 && questionTypeChoice < options3.length) {
-            validquestiontype = true;
-            if (questionTypeChoice == 0) {
-                this.questionType = "";
-            } else {
-                this.questionType = options3[questionTypeChoice];
-            }
+      if (questionTypeChoice >= 0 && questionTypeChoice < options3.length) {
+        validquestiontype = true;
+        if (questionTypeChoice == 0) {
+          this.questionType = "";
         } else {
-            messagePrinter.printMessage("Invalid Range, Please enter a number between 0 and " + (options3.length - 1), true, true);
-            questionTypeChoice = scanner.nextInt(); // to update the value of questionTypeCHoice
+          this.questionType = options3[questionTypeChoice];
         }
+      } else {
+        messagePrinter.printMessage("Invalid Range, Please enter a number between 0 and " + (options3.length - 1), true,
+            true);
+        questionTypeChoice = scanner.nextInt(); // to update the value of questionTypeCHoice
+      }
     }
-    }
+  }
 
   public int getCategory() {
     return category + 8; // Offset by 8 to match category IDs in the API.EX: id": 21,"name": "Sports"

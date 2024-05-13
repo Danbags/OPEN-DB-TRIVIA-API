@@ -1,9 +1,11 @@
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
+
 /**
  * This class represents a result of a quiz question.
- * It contains information about the question such as category, difficulty, question text,
+ * It contains information about the question such as category, difficulty,
+ * question text,
  * correct answer, and incorrect answers.
  */
 public class Result {
@@ -15,9 +17,9 @@ public class Result {
   private String type;
 
   @SerializedName("difficulty")
-  @Expose/**
-   * The difficulty of the question.
-   */
+  @Expose /**
+           * The difficulty of the question.
+           */
   private String difficulty;
 
   @SerializedName("category")
