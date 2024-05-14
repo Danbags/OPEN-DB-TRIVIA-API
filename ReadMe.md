@@ -121,7 +121,6 @@ Overall, the classes in the Quiz Game Application are designed to work together 
    - **Association**: Menu associates with UserService for user-related options.
    - **Association**: Menu associates with Leaderboard for displaying the leaderboard.
 **Association**: Menu associates with DatabaseService for registering and verifying users.
-
    - **Dependency**: Menu depends on MessagePrinter for printing messages.
 
 5. **MessagePrinter**:
@@ -151,8 +150,7 @@ Overall, the classes in the Quiz Game Application are designed to work together 
 12. **UserService**:
     - **Dependency**: UserService depends on DatabaseService for user-related database operations.
 
-   ## UML CLASS RELATIONSHIPS:
-**BUGS**
+ ## **BUGS**
 - Resource Leaks:
    - - Since most of the program requires users input,memory leak from scanners and file handles not being closed.
        
