@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * This class represents a printer for formatting and printing messages.
  * It provides a method for printing messages in a formatted box.

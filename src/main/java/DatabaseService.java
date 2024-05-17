@@ -3,8 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
 
 /**
  * This class represents a service for interacting with the database.
@@ -29,7 +27,7 @@ public class DatabaseService {
    */
   public void addUser(String username, String password) {
     try {
-      File file = new File("src/database.txt"); // Path to mock database file
+      File file = new File(DATABASE_FILE); // Path to mock database file
       FileWriter writer = new FileWriter(file, true); // Append mode
       writer.write(username + "\t" + password + "\n");
       writer.close();
@@ -51,7 +49,7 @@ public class DatabaseService {
    */
   public boolean checkLogin(String username, String password) {
     try {
-      File file = new File("src/database.txt"); // Path to mock database file
+      File file = new File(DATABASE_FILE); // Path to mock database file
       Scanner fileScanner = new Scanner(file);
       boolean usernameFound = false; // Flag to track if username is found
       while (fileScanner.hasNextLine()) {

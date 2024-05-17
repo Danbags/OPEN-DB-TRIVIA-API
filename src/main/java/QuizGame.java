@@ -4,7 +4,7 @@ import java.net.URI;
 import java.net.http.HttpResponse;
 import com.google.gson.Gson;
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * This class represents a quiz game.
