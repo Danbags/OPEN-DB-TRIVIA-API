@@ -14,10 +14,11 @@ public class DatabaseService {
    * The path to the database file.
    */
   private static final String DATABASE_FILE = "src/database.txt";
+
   /**
    * The message printer instance used for printing messages.
    */
-  private MessagePrinter meessagePrinter = new MessagePrinter();
+  private MessagePrinter messagePrinter = new MessagePrinter();
 
   /**
    * Adds a new user to the database with the provided username and password.
@@ -26,13 +27,9 @@ public class DatabaseService {
    * @param password The password of the user to add.
    */
   public void addUser(String username, String password) {
-    try {
-      File file = new File(DATABASE_FILE); // Path to mock database file
-      FileWriter writer = new FileWriter(file, true); // Append mode
+    try (FileWriter writer = new FileWriter(new File(DATABASE_FILE), true)) {
       writer.write(username + "\t" + password + "\n");
-      writer.close();
-      meessagePrinter.printMessage("Registration successful!", true, true);
-      // System.out.println("Registration successful!");
+      messagePrinter.printMessage("Registration successful!", true, true);
     } catch (IOException e) {
       System.out.println("Error writing to database file!");
       e.printStackTrace();
@@ -48,42 +45,31 @@ public class DatabaseService {
    * @return True if the login credentials are valid, otherwise false.
    */
   public boolean checkLogin(String username, String password) {
-    try {
-      File file = new File(DATABASE_FILE); // Path to mock database file
-      Scanner fileScanner = new Scanner(file);
-      boolean usernameFound = false; // Flag to track if username is found
+    try (Scanner fileScanner = new Scanner(new File(DATABASE_FILE))) {
+      boolean usernameFound = false;
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();
         String[] parts = line.split("\\t");
         if (parts[0].equals(username)) {
-          usernameFound = true; // Username found in the database
+          usernameFound = true;
           if (parts[1].equals(password)) {
-            meessagePrinter.printMessage("Login Sucessful!", true, true);
-            // System.out.println("Login successful!");
-            fileScanner.close();
+            messagePrinter.printMessage("Login successful!", true, true);
             return true;
           } else {
-            meessagePrinter.printMessage("Invalid Password!", true, true);// System.out.println("Incorrect password!");
-            fileScanner.close();
+            messagePrinter.printMessage("Invalid password!", true, true);
             return false;
           }
         }
       }
-      fileScanner.close();
       if (usernameFound) {
-        meessagePrinter.printMessage("Incorrect Username! ", true, true);
-        // System.out.println("Incorrect password!"); // Username found, but password is
-        // incorrect
+        messagePrinter.printMessage("Incorrect password!", true, true);
       } else {
-        meessagePrinter.printMessage("INVALID PASSWORD AND USERNAME", true, true);
-        // System.out.println("Username not found!"); // Username not found in the
-        // database
+        messagePrinter.printMessage("Invalid username and password!", true, true);
       }
     } catch (FileNotFoundException e) {
       System.out.println("Database file not found!");
       e.printStackTrace();
     }
-    return false; // Return false if there's an error or if username/password are incorrect
+    return false;
   }
-
 }

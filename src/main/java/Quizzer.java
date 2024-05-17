@@ -1,13 +1,25 @@
 import java.util.List;
-import java.util.*;
+import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class represents a quiz game player.
+ * It provides methods for quizzing the user with questions and handling their responses.
+ */
 public class Quizzer extends Leaderboard {
+
+  /**
+   * Quizzes the user with the provided list of questions.
+   * 
+   * @param questions The list of questions to ask the user.
+   * @param game The QuizGame instance to update the game state.
+   */
   public void quizUser(List<Result> questions, QuizGame game) {
     Scanner scanner = new Scanner(System.in);
     MessagePrinter messagePrinter = new MessagePrinter();
-    for (Result question : questions) {
 
+    for (Result question : questions) {
       messagePrinter.printMessage("Question: " + question.getQuestion(), true, true);
 
       List<String> options = question.getIncorrectAnswers();
@@ -15,52 +27,40 @@ public class Quizzer extends Leaderboard {
       Collections.shuffle(options);
 
       for (int i = 0; i < options.size(); i++) {
-
-        messagePrinter.printMessage(i + 1 + ")" + options.get(i), true, true);
-
+        messagePrinter.printMessage((i + 1) + ") " + options.get(i), true, true);
       }
 
-      // System.out.print("Your answer: ");
       messagePrinter.printMessage("Your answer: ", true, true);
       int userChoice = -1;
       boolean validInput = false;
-      // TO MAKE SURE THE USER INPUTS A VALID INTEGER NUMBER and not
+
+      // Ensure the user inputs a valid integer number
       while (!validInput) {
         try {
           if (scanner.hasNextInt()) {
             userChoice = scanner.nextInt();
             validInput = true;
           } else {
-            System.out.println("Invalid input. Please enter a number.");
+            messagePrinter.printMessage("Invalid input. Please enter a number.", true, true);
             scanner.next(); // Clear invalid input
           }
         } catch (InputMismatchException e) {
-          System.out.println("Invalid input. Please enter a number.");
+          messagePrinter.printMessage("Invalid input. Please enter a number.", true, true);
           scanner.next(); // Clear invalid input
         }
       }
-      boolean validoption = false;
+
+      boolean validOption = false;
       String userAnswer = "";
-      while (!validoption) {
+      while (!validOption) {
         if (userChoice >= 1 && userChoice <= options.size()) {
-          validoption = true;
+          validOption = true;
           userAnswer = options.get(userChoice - 1);
         } else {
-          messagePrinter.printMessage(
-              "That was not part of the options listed, Have another go " + (options.size() - 1), true, true);
+          messagePrinter.printMessage("That was not part of the options listed, have another go: " + options.size(), true, true);
           userChoice = scanner.nextInt();
         }
-
-        /*
-         * if (userChoice < 1 || userChoice > options.size()) {
-         * System.out.println("Invalid choice. Please select an option between 1 and " +
-         * options.size());
-         * continue;
-         */
       }
-
-      // String userAnswer = options.get(userChoice - 1);//we -1 because the user will
-      // enter a number between 1 and 4, but the index of the array is 0,1,2,
 
       if (userAnswer.equals(question.getCorrectAnswer())) {
         messagePrinter.printMessage("Correct", true, true);
@@ -69,24 +69,18 @@ public class Quizzer extends Leaderboard {
       } else {
         messagePrinter.printMessage("Incorrect, The answer is: " + question.getCorrectAnswer(), true, true);
       }
-
     }
 
-    // System.out.println("Quiz completed!");
     messagePrinter.printMessage("Game Over!", true, true);
-    if (game.check_win()) {
-      messagePrinter.printMessage("Congratulations! You have beat the game!", true, true);
-      // SUBMIT USER TO LEADERBOARD
-      SubmitUserToLeaderboard(getLoginUsername(), game.getScore());
-
+    if (game.checkWin()) {
+      messagePrinter.printMessage("Congratulations! You have beaten the game!", true, true);
+        submitUserToLeaderboard(getLoginUsername(), game.getScore());
     } else {
-      messagePrinter.printMessage("Sorry, you lose !", true, true);
+      messagePrinter.printMessage("Sorry, you lose!", true, true);
     }
     messagePrinter.printMessage("Final Score: " + game.getScore(), true, true);
-    System.exit(0);
 
-    // }
     scanner.close();
-
+    System.exit(0);
   }
 }

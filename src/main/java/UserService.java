@@ -3,6 +3,7 @@
  * It provides methods for user signup and login.
  */
 public class UserService {
+
     /**
      * The database service instance used for database operations.
      */

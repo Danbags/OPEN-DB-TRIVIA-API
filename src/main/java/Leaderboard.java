@@ -9,8 +9,8 @@ import java.io.FileNotFoundException;
  * It provides methods for submitting user scores and displaying the
  * leaderboard.
  */
-
 public class Leaderboard extends User {
+
     /**
      * The message printer instance used for printing messages.
      */
@@ -22,12 +22,10 @@ public class Leaderboard extends User {
      * @param username The username of the user.
      * @param score    The score to submit.
      */
-    public void SubmitUserToLeaderboard(String username, int score) {
-        try {
-            FileWriter writer = new FileWriter("src/leaderboard.txt", true); // Append mode
+    public void submitUserToLeaderboard(String username, int score) {
+        try (FileWriter writer = new FileWriter("src/leaderboard.txt", true)) {
             writer.write(getLoginUsername() + "\t" + score + "\n");
-            writer.close();
-            messagePrinter.printMessage("Your score has been submited to the leaderboard", true, true);
+            messagePrinter.printMessage("Your score has been submitted to the leaderboard", true, true);
         } catch (IOException e) {
             messagePrinter.printMessage("Error submitting score to the leaderboard", true, true);
             e.printStackTrace();
@@ -37,26 +35,21 @@ public class Leaderboard extends User {
     /**
      * Displays the leaderboard showing the top scores.
      */
-
     public void displayLeaderboard() {
-
-        try {
-            File file = new File("src/leaderboard.txt"); // Path to leaderboard file
-            Scanner fileScanner = new Scanner(file);
+        try (Scanner fileScanner = new Scanner(new File("src/leaderboard.txt"))) {
             messagePrinter.printMessage("Leaderboard Top Scores", true, false);
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 String[] parts = line.split("\\t");
-                if (parts.length >= 2) { // Ensure there are at least two parts (username and score)
+                if (parts.length >= 2) {
                     String user = parts[0];
                     String score = parts[1];
-                    messagePrinter.printMessage(user + "\\t" + score, true, true);
+                    messagePrinter.printMessage(user + "\t" + score, true, true);
                 } else {
                     // Handle invalid format or empty lines
                     messagePrinter.printMessage("🔴" + line, true, true);
                 }
             }
-            fileScanner.close();
         } catch (FileNotFoundException e) {
             messagePrinter.printMessage("Leaderboard file not found.", true, true);
         }
