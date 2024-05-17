@@ -5,26 +5,32 @@ import java.util.Scanner;
  * It provides methods for displaying the menu and handling user input.
  */
 public class Menu extends User {
+
   /**
    * The message printer instance used for printing messages.
    */
   private MessagePrinter messagePrinter;
+
   /**
    * The user service instance used for user authentication and signup.
    */
   private UserService userService;
+
   /**
    * The scanner instance used for user input.
    */
   private Scanner scanner;
+
   /**
    * The database service instance used for database operations.
    */
   private DatabaseService databaseService;
+
   /**
    * The leaderboard instance used for accessing leaderboard functionalities.
    */
   private Leaderboard leaderboard;
+
   /**
    * Flag indicating whether a user is logged in or not.
    */
@@ -32,19 +38,16 @@ public class Menu extends User {
 
   /**
    * Constructs a new Menu object.
-   * that initializes the message printer, user service, scanner, database
-   * service, and leaderboard.
+   * Initializes the message printer, user service, scanner, database service, and
+   * leaderboard.
    */
-
   public Menu() {
-
     messagePrinter = new MessagePrinter();
     scanner = new Scanner(System.in);
     databaseService = new DatabaseService();
     userService = new UserService(databaseService);
-    loggedIn = false;
     leaderboard = new Leaderboard();
-
+    loggedIn = false;
   }
 
   /**
@@ -52,11 +55,7 @@ public class Menu extends User {
    */
   public void displayMenu() {
     if (!loggedIn) {
-      messagePrinter.printMessage("Please select one of the following options:", true, true);
-      messagePrinter.printMessage("1) Sign up", true, true);
-      messagePrinter.printMessage("2) Login", true, true);
-      messagePrinter.printMessage("3) Exit", true, true);
-
+      showMainMenuOptions();
       int choice = scanner.nextInt();
       scanner.nextLine(); // Consume newline
 
@@ -68,8 +67,7 @@ public class Menu extends User {
           login();
           break;
         case 3:
-          messagePrinter.printMessage("Thank you for using our services. Have a good day!", true, true);
-          scanner.close();
+          exitApplication();
           return; // Exit the method and the program
         default:
           messagePrinter.printMessage("Invalid choice. Please select a valid option.", true, true);
@@ -84,6 +82,19 @@ public class Menu extends User {
     }
   }
 
+  /**
+   * Displays the main menu options.
+   */
+  private void showMainMenuOptions() {
+    messagePrinter.printMessage("Please select one of the following options:", true, true);
+    messagePrinter.printMessage("1) Sign up", true, true);
+    messagePrinter.printMessage("2) Login", true, true);
+    messagePrinter.printMessage("3) Exit", true, true);
+  }
+
+  /**
+   * Handles the user signup process.
+   */
   private void signup() {
     String username = "", password = "";
     boolean validUsername = false;
@@ -112,7 +123,7 @@ public class Menu extends User {
       if (password.length() >= 6) {
         validPassword = true;
       } else {
-        messagePrinter.printMessage("Invalid password. Password must be at least 6 characters long.No Spaces", true,
+        messagePrinter.printMessage("Invalid password. Password must be at least 6 characters long. No spaces.", true,
             true);
       }
     }
@@ -121,6 +132,9 @@ public class Menu extends User {
     userService.signup(username, password);
   }
 
+  /**
+   * Handles the user login process.
+   */
   private void login() {
     String username, password;
     messagePrinter.printMessage("Enter your username: ", true, true);
@@ -128,23 +142,23 @@ public class Menu extends User {
     messagePrinter.printMessage("Enter your password: ", true, true);
     password = scanner.nextLine();
     if (userService.login(username, password)) {
-      // TO SET THE PASSWORD AND USERNAME FOR THE ACTIVE PLAYER AND SET THEM AS LOGGED
-      // IN
       setUsername(username);
       setPassword(password);
       loggedIn = true;
-    } // else {
-    // messagePrinter.printMessage("Invalid username or password. Please try
-    // again.", true, true);
-    // }
+    } else {
+      messagePrinter.printMessage("Invalid username or password. Please try again.", true, true);
+    }
   }
 
+  /**
+   * Displays the game menu.
+   */
   public void displayGameMenu() {
     messagePrinter.printMessage("Welcome to the Quiz Game! 😄 " + getLoginUsername(), true, false);
     messagePrinter.printMessage("1) Begin Game", true, false);
     messagePrinter.printMessage("2) Display LeaderBoard", true, false);
     messagePrinter.printMessage("3) Sign out", true, false);
-    messagePrinter.printMessage("4)QUIT GAME", true, true);
+    messagePrinter.printMessage("4) Quit Game", true, true);
 
     int choice = scanner.nextInt();
     scanner.nextLine(); // Consume newline
@@ -153,16 +167,12 @@ public class Menu extends User {
       case 1:
         startGame();
         break;
-
       case 2:
         leaderboard.displayLeaderboard();
         break;
-
       case 3:
-        messagePrinter.printMessage("Thank you for playing. Goodbye " + getLoginUsername() + " !", true, true);
-        loggedIn = false; // Log out the user
+        signOut();
         break;
-
       case 4:
         System.exit(0);
         break;
@@ -178,8 +188,27 @@ public class Menu extends User {
     }
   }
 
+  /**
+   * Starts the quiz game.
+   */
   private void startGame() {
     QuizGame quizGame = new QuizGame("https://opentdb.com/api.php?");
     quizGame.startGame();
+  }
+
+  /**
+   * Signs out the current user.
+   */
+  private void signOut() {
+    messagePrinter.printMessage("Thank you for playing. Goodbye " + getLoginUsername() + " !", true, true);
+    loggedIn = false; // Log out the user
+  }
+
+  /**
+   * Exits the application.
+   */
+  private void exitApplication() {
+    messagePrinter.printMessage("Thank you for using our services. Have a good day!", true, true);
+    scanner.close();
   }
 }

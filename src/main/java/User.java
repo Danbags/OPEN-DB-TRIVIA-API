@@ -9,26 +9,45 @@ public class User {
      * The username of the user.
      */
     private String username;
+
     /**
      * The password of the user.
      */
     private String password;
 
-    // Getters and setters for the fields...
+    /**
+     * Gets the username of the user.
+     * 
+     * @return The username.
+     */
     public String getLoginUsername() {
         return username;
     }
 
+    /**
+     * Gets the password of the user.
+     * 
+     * @return The password.
+     */
     public String getLoginPassword() {
         return password;
     }
 
-    public void setUsername(String user) {
-        username = user;
+    /**
+     * Sets the username of the user.
+     * 
+     * @param username The username to set.
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setPassword(String userpass) {
-        password = userpass;
+    /**
+     * Sets the password of the user.
+     * 
+     * @param password The password to set.
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
-
 }
